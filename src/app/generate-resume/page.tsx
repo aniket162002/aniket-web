@@ -145,12 +145,13 @@ export default function GenerateResume() {
       ];
 
       workExperiences.forEach(({ role, bullets }) => {
-        doc.setFont(undefined, 'bold');
-        doc.text(role, 14, y);
-        y += 6;
-        doc.setFont(undefined, 'normal');
-        addBullets(bullets);
-      });
+  doc.setFont('helvetica', 'bold');
+  doc.text(role, 14, y);
+  y += 6;
+  doc.setFont('helvetica', 'normal');
+  addBullets(bullets);
+});
+
 
       // === Projects ===
       addSection('Projects');
