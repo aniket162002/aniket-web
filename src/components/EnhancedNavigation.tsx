@@ -23,6 +23,7 @@ export default function EnhancedNavigation() {
     { label: 'Experience', href: '#experience', section: 'experience', icon: '💼' },
     { label: 'Education', href: '#education', section: 'education', icon: '🎓' },
     { label: 'Projects', href: '#projects', section: 'projects', icon: '🚀' },
+    { label: 'Freelancing', href: '/freelancing', section: 'freelancing', icon: '💰', isExternal: true },
     { label: 'Certificates', href: '#certificates', section: 'certificates', icon: '🏆' },
     { label: 'Contact', href: '#contact', section: 'contact', icon: '📧' },
   ]
@@ -59,11 +60,15 @@ export default function EnhancedNavigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [navItems])
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, isExternal?: boolean) => {
     playClickSound()
-    document.querySelector(href)?.scrollIntoView({
-      behavior: 'smooth'
-    })
+    if (isExternal) {
+      window.location.href = href
+    } else {
+      document.querySelector(href)?.scrollIntoView({
+        behavior: 'smooth'
+      })
+    }
     setIsOpen(false)
   }
 
@@ -89,7 +94,7 @@ export default function EnhancedNavigation() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={playHoverSound}
-              onClick={() => handleNavClick('#hero')}
+              onClick={() => handleNavClick('#hero', false)}
             >
               Aniket<span className={`bg-gradient-to-r ${colorSchemes[colorScheme]} bg-clip-text text-transparent`}>.</span>
             </motion.a>
@@ -105,7 +110,9 @@ export default function EnhancedNavigation() {
                   <motion.a
                     href={item.href}
                     className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                      activeSection === item.section
+                      item.label === 'Freelancing'
+                        ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg border border-purple-400/50'
+                        : activeSection === item.section
                         ? `bg-gradient-to-r ${colorSchemes[colorScheme]} text-white shadow-lg`
                         : 'text-white/80 hover:text-white hover:bg-white/10'
                     }`}
@@ -114,13 +121,16 @@ export default function EnhancedNavigation() {
                     onMouseEnter={playHoverSound}
                     onClick={(e) => {
                       e.preventDefault()
-                      handleNavClick(item.href)
+                      handleNavClick(item.href, item.isExternal)
                     }}
                   >
                     <span className="text-xs">{item.icon}</span>
                     {item.label}
-                    
-                    {activeSection === item.section && (
+                    {item.label === 'Freelancing' && (
+                      <span className="ml-1 px-1.5 py-0.5 bg-white/20 rounded text-xs">New</span>
+                    )}
+
+                    {activeSection === item.section && item.label !== 'Freelancing' && (
                       <motion.div
                         layoutId="activeIndicator"
                         className="absolute inset-0 bg-white/20 rounded-lg -z-10"
@@ -146,7 +156,7 @@ export default function EnhancedNavigation() {
               className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavClick('#hero')}
+              onClick={() => handleNavClick('#hero', false)}
             >
               Aniket<span className={`bg-gradient-to-r ${colorSchemes[colorScheme]} bg-clip-text text-transparent`}>.</span>
             </motion.a>
@@ -200,11 +210,13 @@ export default function EnhancedNavigation() {
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="w-full"
                     >
-                      <motion.a 
+                      <motion.a
                         href={item.href}
                         className={`flex items-center gap-4 w-full p-4 rounded-xl text-lg font-medium transition-all duration-300 ${
-                          activeSection === item.section 
-                            ? `bg-gradient-to-r ${colorSchemes[colorScheme]} text-white shadow-xl` 
+                          item.label === 'Freelancing'
+                            ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-xl border border-purple-400/50'
+                            : activeSection === item.section
+                            ? `bg-gradient-to-r ${colorSchemes[colorScheme]} text-white shadow-xl`
                             : 'text-white/80 hover:text-white hover:bg-white/10'
                         }`}
                         whileHover={{ scale: 1.05, x: 10 }}
@@ -212,11 +224,16 @@ export default function EnhancedNavigation() {
                         onMouseEnter={playHoverSound}
                         onClick={(e) => {
                           e.preventDefault()
-                          handleNavClick(item.href)
+                          handleNavClick(item.href, item.isExternal)
                         }}
                       >
                         <span className="text-2xl">{item.icon}</span>
-                        {item.label}
+                        <div className="flex items-center gap-2">
+                          {item.label}
+                          {item.label === 'Freelancing' && (
+                            <span className="px-2 py-1 bg-white/20 rounded text-sm">New</span>
+                          )}
+                        </div>
                       </motion.a>
                     </motion.li>
                   ))}
