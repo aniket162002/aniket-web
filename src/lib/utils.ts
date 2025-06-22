@@ -5,7 +5,111 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const personalData = {
+// Type definitions for freelancing data
+export interface FreelancingService {
+  title: string
+  description: string
+  icon: string
+  features: string[]
+  pricing: string
+  color: string
+}
+
+export interface FreelancingProject {
+  title: string
+  client: string
+  date: string
+  description: string
+  image: string
+  technologies: string[]
+  category: string
+  outcome: string
+  testimonial: string
+  liveUrl: string
+  caseStudyUrl: string
+  color: string
+}
+
+export interface FreelancingTestimonial {
+  name: string
+  position: string
+  company: string
+  image: string
+  rating: number
+  text: string
+  project: string
+  date: string
+}
+
+export interface FreelancingStats {
+  projectsCompleted: number
+  clientsSatisfied: number
+  yearsExperience: number
+  technologiesUsed: number
+}
+
+export interface FreelancingProcess {
+  step: number
+  title: string
+  description: string
+  icon: string
+  duration: string
+}
+
+export interface FreelancingData {
+  services: FreelancingService[]
+  projects: FreelancingProject[]
+  testimonials: FreelancingTestimonial[]
+  stats: FreelancingStats
+  process: FreelancingProcess[]
+}
+
+export const personalData: {
+  name: string
+  email: string
+  phone: string
+  github: string
+  linkedin: string
+  website: string
+  title: string
+  subtitle: string
+  summary: string
+  skills: {
+    programming: string[]
+    webFrameworks: string[]
+    mobile: string[]
+    database: string[]
+    tools: string[]
+    concepts: string[]
+  }
+  experience: Array<{
+    company: string
+    position: string
+    duration: string
+    achievements: string[]
+  }>
+  education: Array<{
+    institution: string
+    degree: string
+    duration: string
+    grade: string
+  }>
+  projects: Array<{
+    title: string
+    date: string
+    description: string
+    technologies: string[]
+  }>
+  certificates: Array<{
+    title: string
+    date: string
+  }>
+  achievements: Array<{
+    title: string
+    date: string
+  }>
+  freelancing: FreelancingData
+} = {
   name: "Aniket Shinde",
   email: "shindeaniketa7328@gmail.com",
   phone: "+91-9819394470",
@@ -129,5 +233,182 @@ export const personalData = {
       title: "Ex NCC Cadet",
       date: "Jun 2021"
     }
-  ]
+  ],
+
+  freelancing: {
+    services: [
+      {
+        title: "Full Stack Web Development",
+        description: "Complete web applications using modern technologies like React, Next.js, Node.js, and MongoDB",
+        icon: "🌐",
+        features: ["Responsive Design", "API Integration", "Database Design", "Performance Optimization"],
+        pricing: "Starting from $500",
+        color: "from-blue-500 to-cyan-500"
+      },
+      {
+        title: "Mobile App Development",
+        description: "Cross-platform mobile applications using Flutter with AI integration and modern UI/UX",
+        icon: "📱",
+        features: ["Cross-Platform", "AI Integration", "Real-time Features", "Cloud Backend"],
+        pricing: "Starting from $800",
+        color: "from-purple-500 to-pink-500"
+      },
+      {
+        title: "Machine Learning Solutions",
+        description: "Custom ML models for computer vision, data analysis, and predictive analytics",
+        icon: "🤖",
+        features: ["Computer Vision", "Data Analysis", "Predictive Models", "API Integration"],
+        pricing: "Starting from $600",
+        color: "from-green-500 to-emerald-500"
+      },
+      {
+        title: "API Development & Integration",
+        description: "RESTful APIs, microservices, and third-party integrations for scalable applications",
+        icon: "🔗",
+        features: ["RESTful APIs", "Microservices", "Third-party Integration", "Documentation"],
+        pricing: "Starting from $300",
+        color: "from-orange-500 to-red-500"
+      }
+    ],
+
+    projects: [
+      {
+        title: "AI-Powered Photo Album App",
+        client: "TT Infotech",
+        date: "Jan 2025",
+        description: "Full-stack Flutter application with AI-powered photo organization, secure cloud storage, and intelligent tagging system",
+        image: "/images/freelance/photo-album.jpg",
+        technologies: ["Flutter", "PHP", "MySQL", "AI/ML", "Cloud Storage"],
+        category: "Mobile Development",
+        outcome: "Delivered a complete photo management solution with 40% faster image processing",
+        testimonial: "Exceptional work! The AI features exceeded our expectations.",
+        liveUrl: "#",
+        caseStudyUrl: "#",
+        color: "from-blue-600 to-purple-600"
+      },
+      {
+        title: "Banking System Integration",
+        client: "Utkarsh Small Finance Bank",
+        date: "Aug 2024 - Dec 2024",
+        description: "Optimized IT infrastructure and implemented secure banking solutions with seamless system integration",
+        image: "/images/freelance/banking-system.jpg",
+        technologies: ["Java", "Spring Boot", "MySQL", "Apache Kafka", "Microservices"],
+        category: "Enterprise Development",
+        outcome: "Improved system performance by 35% and enhanced security protocols",
+        testimonial: "Professional approach and excellent technical skills.",
+        liveUrl: "#",
+        caseStudyUrl: "#",
+        color: "from-green-600 to-teal-600"
+      },
+      {
+        title: "Real-Time License Plate Recognition",
+        client: "Academic Project (Available for Commercial Use)",
+        date: "Dec 2023",
+        description: "Advanced computer vision system for real-time license plate detection and character recognition",
+        image: "/images/freelance/license-plate.jpg",
+        technologies: ["OpenCV", "Python", "Machine Learning", "TensorFlow", "Real-time Processing"],
+        category: "Machine Learning",
+        outcome: "Achieved 95% accuracy in real-time plate recognition",
+        testimonial: "Innovative solution with impressive accuracy rates.",
+        liveUrl: "#",
+        caseStudyUrl: "#",
+        color: "from-purple-600 to-pink-600"
+      },
+      {
+        title: "E-commerce Platform",
+        client: "Local Business",
+        date: "Nov 2023",
+        description: "Complete e-commerce solution with inventory management, payment integration, and admin dashboard",
+        image: "/images/freelance/ecommerce.jpg",
+        technologies: ["React.js", "Node.js", "MongoDB", "Stripe API", "AWS"],
+        category: "Web Development",
+        outcome: "Increased client's online sales by 60% within first month",
+        testimonial: "Outstanding platform that transformed our business.",
+        liveUrl: "#",
+        caseStudyUrl: "#",
+        color: "from-orange-600 to-red-600"
+      }
+    ],
+
+    testimonials: [
+      {
+        name: "Rajesh Kumar",
+        position: "CTO, TT Infotech",
+        company: "TT Infotech",
+        image: "/images/testimonials/rajesh.jpg",
+        rating: 5,
+        text: "Aniket delivered an exceptional Flutter app with AI integration. His technical expertise and attention to detail are remarkable. The project was completed on time and exceeded our expectations.",
+        project: "AI-Powered Photo Album App",
+        date: "Jan 2025"
+      },
+      {
+        name: "Priya Sharma",
+        position: "IT Manager",
+        company: "Utkarsh Small Finance Bank",
+        image: "/images/testimonials/priya.jpg",
+        rating: 5,
+        text: "Working with Aniket was a pleasure. He optimized our banking systems significantly and showed great professionalism throughout the project. Highly recommended for enterprise solutions.",
+        project: "Banking System Integration",
+        date: "Dec 2024"
+      },
+      {
+        name: "Michael Chen",
+        position: "Startup Founder",
+        company: "TechStart Solutions",
+        image: "/images/testimonials/michael.jpg",
+        rating: 5,
+        text: "Aniket built our entire web platform from scratch. His full-stack skills are impressive, and he delivered a scalable solution that handles our growing user base perfectly.",
+        project: "E-commerce Platform",
+        date: "Nov 2023"
+      },
+      {
+        name: "Dr. Sarah Johnson",
+        position: "Research Director",
+        company: "AI Research Lab",
+        image: "/images/testimonials/sarah.jpg",
+        rating: 5,
+        text: "The machine learning solution Aniket developed for us is outstanding. His understanding of computer vision and real-time processing is exceptional.",
+        project: "License Plate Recognition",
+        date: "Dec 2023"
+      }
+    ],
+
+    stats: {
+      projectsCompleted: 15,
+      clientsSatisfied: 12,
+      yearsExperience: 2,
+      technologiesUsed: 20
+    },
+
+    process: [
+      {
+        step: 1,
+        title: "Discovery & Planning",
+        description: "Understanding your requirements, goals, and technical specifications",
+        icon: "🔍",
+        duration: "1-2 days"
+      },
+      {
+        step: 2,
+        title: "Design & Architecture",
+        description: "Creating wireframes, system architecture, and technical documentation",
+        icon: "📐",
+        duration: "2-3 days"
+      },
+      {
+        step: 3,
+        title: "Development & Testing",
+        description: "Agile development with regular updates and comprehensive testing",
+        icon: "⚡",
+        duration: "1-4 weeks"
+      },
+      {
+        step: 4,
+        title: "Deployment & Support",
+        description: "Production deployment with ongoing support and maintenance",
+        icon: "🚀",
+        duration: "1-2 days + ongoing"
+      }
+    ]
+  }
 }
