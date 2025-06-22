@@ -20,12 +20,13 @@ export default function GenerateResume() {
       return y;
     };
 
-    const icons: Record<string, string> = {
-      email: 'data:image/png;base64,...',
-      phone: 'data:image/png;base64,...',
-      github: 'data:image/png;base64,...',
-      linkedin: 'data:image/png;base64,...',
-    };
+  const icons: Record<string, string> = {
+  email: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAMAAACg6A4XAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA5FBMVEUAAACZmZn///+ZmZnMzMzm5ubAwMCZmZnZ2dmlpaWZmZnW1tbk5OTg4ODu7u7Pz8+ZmZnq6urR0dHZ2dnJycnGxsbS0tLw8PCZmZnNzc2cnJyjo6Ompqb09PTf398aGhoYGBg2NjauLi5bW1teXl7d3d3Ly8szMzN1dXUtLS2QkJDT09PS0tLExMTmZmZubm5tbW0vLy8qKioqKioWFhYyMjIxMTEqKiotLS2goKDg4OCsrKxtbW1gYGBmZmZ9fX3Ozs6ioqJISEjjI+z6AAAAQHRSTlMAAwoSGyQnLzNHS3yAjpiZnrO2usHAv8DNz9fn6+/z9/f7+/zBwcPGx8jNzs/R1NXW2Nna29zd3+Tl5ujr7vLz9fb3+Pb3CgAAAFtJREFUGBltwYcWwzAMRdGvtVaOqL7+/+dAOmomFDe4vRgkUwnIkMHUsJwn3Aq8dLgM1dRAw40NaYAXcY3OlZQ4ILKn4HgyAcKZ9OKmuw7od4J9cnMCAAAAAElFTkSuQmCC',
+  phone: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAV1BMVEUAAACZmZn///+ZmZnMzMxmZmZkZGRnZ2dYWFhISEhLS0tFRUUtLS0zMzM0NDSVlZUlJSUqKioqKioeHh4qKioyMjIkJCQfHx8tLS0dHR0dHR3o6OhcXFw7Ozt3d3cuLi7////WuPNuAAAAHHRSTlMABAcQFBUXGBobHB8gIygsLjM8QkdJTFBhZXaJqra8vdP9B9UAAABPSURBVBjTY2AgCjAwMHFxAAQJzMxMUDAyMzAwKDMyAHR0cDAYiQOMjIwMDUw4QAKMiKQkMxA2cAwMDMwMBQYsCE2MVYMTMYGAbFQKCAAhhBbIKzqv9oAAAAAElFTkSuQmCC',
+  github: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAWlBMVEUAAACZmZn///+ZmZnMzMxmZmZlZWV+fn5ycnJsZGRhYWF+fn59fX2hoaHKysoxMTHw8PDMzMzq6urExMRAQECkpKQvLy9TU1MyMjJwcHCKiopISEjZ2dnDw8OAgIBYWFj/////oHdVAAAAIHRSTlMABAMGDhITFhcZHR4hIyUpLzNHS3yAj5uan66yuru/wMHDxcnP2OKNAAAAXklEQVQY02NgwAkEJiYmJkZGBhYmJhYG5iYGRgYGB4+fkFFxaWkpGBQ1NQTkFKSmpqBqKSkFlZWVhZXV0DcXNzCwsLe3u4cvv6BA8tLSwwsLEzMzAwAADYbR0q7ap3UAAAAAElFTkSuQmCC',
+  linkedin: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAUVBMVEUAAACZmZn///+ZmZnMzMxmZmZkZGRbW1tTU1NaWlpFRUUlJSUrKyswMDDZ2dnKysrPz8+cnJxuYmKsrKyhoaGQkJD///9ubm5wcHBtbW0+Pj6np6f8MBCnAAAAGnRSTlMAAQIEBQcICQoNDxAREhQVFhcYGR8hIyUqLIrH4bsAAABKSURBVBjTY2BgZGJhYmBgYGBgGBgYBpaWlhYGhgYGBgZGRgaGhgYmBgYIuLh4+fj5eXm5ufo6OkApsbGZGBgoKChpKSkAACAjO0ZcpUArAAAAAElFTkSuQmCC',
+};
+
 
     const addIconText = (icon: string, text: string, x: number, y: number): void => {
       doc.addImage(icon, 'PNG', x, y - 3, 5, 5);
