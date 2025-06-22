@@ -30,7 +30,7 @@ export default function GenerateResume() {
           'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAUVBMVEUAAACZmZn///+ZmZnMzMxmZmZkZGRbW1tTU1NaWlpFRUUlJSUrKyswMDDZ2dnKysrPz8+cnJxuYmKsrKyhoaGQkJD///9ubm5wcHBtbW0+Pj6np6f8MBCnAAAAGnRSTlMAAQIEBQcICQoNDxAREhQVFhcYGR8hIyUqLIrH4bsAAABKSURBVBjTY2BgZGJhYmBgYGBgGBgYBpaWlhYGhgYGBgZGRgaGhgYmBgYIuLh4+fj5eXm5ufo6OkApsbGZGBgoKChpKSkAACAjO0ZcpUArAAAAAElFTkSuQmCC'
       };
 
-      const addIconText = (icon, text, x, y) => {
+     const addIconText = (icon: string, text: string, x: number, y: number): void => {
         doc.addImage(icon, 'PNG', x, y - 3, 5, 5);
         doc.text(text, x + 7, y);
       };
