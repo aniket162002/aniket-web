@@ -10,7 +10,7 @@ export default function GenerateResume() {
       const doc = new jsPDF();
 
       const pageHeight = doc.internal.pageSize.height || 297;
-      const checkPageOverflow = (y) => {
+     const checkPageOverflow = (y: number): number => {
         if (y > pageHeight - 20) {
           doc.addPage();
           return 20;
