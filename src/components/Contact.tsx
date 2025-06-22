@@ -30,13 +30,24 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      const response = await fetch('https://api.getform.io/v1/forms/0167c781-398a-4e0e-ac0c-9e5b282d4ab9?token=oLQa7uTlHhHkZtXj6tNz6mikAeEp6EjRre8AlO7XpR14SuXWxL98FYzXSNtB', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -119,7 +130,12 @@ export default function Contact() {
           >
             <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4 md:mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                action="https://api.getform.io/v1/forms/0167c781-398a-4e0e-ac0c-9e5b282d4ab9?token=oLQa7uTlHhHkZtXj6tNz6mikAeEp6EjRre8AlO7XpR14SuXWxL98FYzXSNtB"
+                method="POST"
+                className="space-y-4 sm:space-y-6"
+              >
                 <div>
                   <label htmlFor="name" className="block text-gray-300 mb-2 font-medium text-sm sm:text-base">Name</label>
                   <input
@@ -172,23 +188,33 @@ export default function Contact() {
                 </button>
 
                 {submitStatus === 'success' && (
-                  <motion.p
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-green-400 text-center"
+                    className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center"
                   >
-                    Message sent successfully!
-                  </motion.p>
+                    <p className="text-green-400 font-medium">
+                      ✅ Message sent successfully!
+                    </p>
+                    <p className="text-green-300 text-sm mt-1">
+                      Thank you for reaching out. I'll get back to you soon!
+                    </p>
+                  </motion.div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <motion.p
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-red-400 text-center"
+                    className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-center"
                   >
-                    Failed to send message. Please try again.
-                  </motion.p>
+                    <p className="text-red-400 font-medium">
+                      ❌ Failed to send message
+                    </p>
+                    <p className="text-red-300 text-sm mt-1">
+                      Please try again or contact me directly via email.
+                    </p>
+                  </motion.div>
                 )}
               </form>
             </div>
