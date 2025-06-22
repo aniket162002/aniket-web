@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
@@ -20,6 +20,7 @@ export default function GenerateResume() {
       return y;
     };
 
+    
   const icons: Record<string, string> = {
   email: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAMAAACg6A4XAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA5FBMVEUAAACZmZn///+ZmZnMzMzm5ubAwMCZmZnZ2dmlpaWZmZnW1tbk5OTg4ODu7u7Pz8+ZmZnq6urR0dHZ2dnJycnGxsbS0tLw8PCZmZnNzc2cnJyjo6Ompqb09PTf398aGhoYGBg2NjauLi5bW1teXl7d3d3Ly8szMzN1dXUtLS2QkJDT09PS0tLExMTmZmZubm5tbW0vLy8qKioqKioWFhYyMjIxMTEqKiotLS2goKDg4OCsrKxtbW1gYGBmZmZ9fX3Ozs6ioqJISEjjI+z6AAAAQHRSTlMAAwoSGyQnLzNHS3yAjpiZnrO2usHAv8DNz9fn6+/z9/f7+/zBwcPGx8jNzs/R1NXW2Nna29zd3+Tl5ujr7vLz9fb3+Pb3CgAAAFtJREFUGBltwYcWwzAMRdGvtVaOqL7+/+dAOmomFDe4vRgkUwnIkMHUsJwn3Aq8dLgM1dRAw40NaYAXcY3OlZQ4ILKn4HgyAcKZ9OKmuw7od4J9cnMCAAAAAElFTkSuQmCC',
   phone: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAV1BMVEUAAACZmZn///+ZmZnMzMxmZmZkZGRnZ2dYWFhISEhLS0tFRUUtLS0zMzM0NDSVlZUlJSUqKioqKioeHh4qKioyMjIkJCQfHx8tLS0dHR0dHR3o6OhcXFw7Ozt3d3cuLi7////WuPNuAAAAHHRSTlMABAcQFBUXGBobHB8gIygsLjM8QkdJTFBhZXaJqra8vdP9B9UAAABPSURBVBjTY2AgCjAwMHFxAAQJzMxMUDAyMzAwKDMyAHR0cDAYiQOMjIwMDUw4QAKMiKQkMxA2cAwMDMwMBQYsCE2MVYMTMYGAbFQKCAAhhBbIKzqv9oAAAAAElFTkSuQmCC',
@@ -28,8 +29,13 @@ export default function GenerateResume() {
 };
 
 
+
     const addIconText = (icon: string, text: string, x: number, y: number): void => {
-      doc.addImage(icon, 'PNG', x, y - 3, 5, 5);
+      try {
+        doc.addImage(icon, 'PNG', x, y - 3, 5, 5);
+      } catch (e) {
+        console.warn('Image load failed', e);
+      }
       doc.text(text, x + 7, y);
     };
 
@@ -70,22 +76,24 @@ export default function GenerateResume() {
       y += 2;
     };
 
-    // Sections
+    // Summary
     addSection('Professional Summary');
-    const summary = 'Versatile software engineer with solid experience in full-stack development, Flutter, and ML...';
+    const summary = 'Versatile software engineer with full-stack, Flutter, ML, banking, and legacy systems experience.';
     const summaryLines = doc.splitTextToSize(summary, 180);
     doc.text(summaryLines, 14, y);
     y += summaryLines.length * 5;
     y = checkPageOverflow(y);
 
+    // Skills
     addSection('Skills');
     addBullets([
       'JavaScript, Python, Java, C++, SQL',
-      'React.js, Node.js, Next.js, Spring Boot, HTML, CSS, TailwindCSS',
+      'React.js, Node.js, Next.js, Spring Boot, TailwindCSS',
       'Flutter, MongoDB, MySQL, Git, GitHub, Kafka',
-      'Machine Learning, REST APIs, Agile'
+      'Machine Learning, REST APIs, Agile Dev'
     ]);
 
+    // Education
     addSection('Education');
     addBullets([
       'B.E. in IT | CGPA: 8.9 | ACPCE | 2020–2024',
@@ -93,23 +101,21 @@ export default function GenerateResume() {
       'Class X | 81.2% | Raja Shivaji Vidyalaya'
     ]);
 
+    // Experience
     addSection('Work Experience');
     const workExperiences = [
       {
         role: 'SUD Life | Software Engineer Trainee | Dec 2024 – Present',
         bullets: [
-          'Contributed to digital insurance API projects.',
-          'Maintained SMART400 systems.'
+          'Contributed to digital insurance APIs.',
+          'Maintained legacy SMART400 systems.'
         ]
       },
       {
         role: 'Utkarsh Bank | Software Engineer | Aug 2024 – Dec 2024',
-        bullets: [
-          'Managed IT infra and system integrations.'
-        ]
+        bullets: ['Managed IT infra and secure integrations.']
       }
     ];
-
     workExperiences.forEach(({ role, bullets }) => {
       doc.setFont('helvetica', 'bold');
       doc.text(role, 14, y);
@@ -118,6 +124,7 @@ export default function GenerateResume() {
       addBullets(bullets);
     });
 
+    // Projects
     addSection('Projects');
     addBullets([
       'License Plate Recognition (OpenCV)',
@@ -125,12 +132,14 @@ export default function GenerateResume() {
       'Code Sync Collaboration Tool'
     ]);
 
+    // Certificates
     addSection('Certificates');
     addBullets([
       'Full Stack – Codedamn',
       'Cyber Warrior – Hackingflix'
     ]);
 
+    // Achievements
     addSection('Achievements');
     addBullets([
       'Ex NSS Volunteer',
