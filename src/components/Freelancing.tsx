@@ -170,14 +170,18 @@ export default function Freelancing() {
               <ArrowRight size={16} />
             </motion.button>
             
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 md:px-8 py-3 md:py-4 border-2 border-white/20 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
-            >
-              <Calendar size={20} />
-              Schedule Consultation
-            </motion.button>
+           <motion.a
+  href="https://calendly.com/shindeaniket47328/freelance"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.05, y: -2 }}
+  whileTap={{ scale: 0.95 }}
+  className="px-6 md:px-8 py-3 md:py-4 border-2 border-white/20 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+>
+  <Calendar size={20} />
+  Schedule Consultation
+</motion.a>
+
           </div>
         </motion.div>
 
